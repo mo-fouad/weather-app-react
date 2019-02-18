@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './scss/app.scss';
 import Weather from './components/weather';
 import Form from './components/form';
@@ -34,20 +34,33 @@ class App extends React.Component {
 
         // updating the initial stats of our app
 
-        if (city && country) {
-            this.setState({
-                temperature: Math.ceil(response.main.temp - 273.15),
-                city: response.name,
-                country: response.sys.country,
-                humidity: response.main.humidity,
-                description: response.weather[0].description,
-                error: ""
-            })
 
-        } else {
+        if (response.cod == '404') {
+            console.log(response);
             this.setState({
-                error: "Please input search values..."
+                temperature: ":/",
+                city: " :/",
+                country: ":/",
+                humidity: ":/",
+                description: ":/",
+                error: response.message
             })
+        } else {
+            if (city && country) {
+                this.setState({
+                    temperature: Math.ceil(response.main.temp - 273.15),
+                    city: response.name,
+                    country: response.sys.country,
+                    humidity: response.main.humidity,
+                    description: response.weather[0].description,
+                    error: ""
+                })
+
+            } else {
+                this.setState({
+                    error: "Please input search values..."
+                })
+            }
         }
     };
 
