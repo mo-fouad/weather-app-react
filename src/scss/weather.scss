@@ -1,0 +1,10 @@
+.weather--data {
+  padding: 20px 0;
+  border-bottom: 1px solid #333;
+  >div {
+    padding: 5px;
+    span {
+      color: #24f;
+    }
+  }
+}
